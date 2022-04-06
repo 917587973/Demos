@@ -1,0 +1,119 @@
+﻿@model List<Demos.Models.Persons>
+
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="row">  
+    <div class="col-md-9">  
+        <form asp-action="Create">  
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>  
+              
+            <div class="form-group">  
+                <label for="FirstName" class="control-label"> FirstName</label>  
+                <input name="FirstName" class="form-control"  />  
+                <span validation-for="FirstName" class="text-danger"></span>  
+            </div>  
+            <div class="form-group">  
+                <label for="LastName" class="control-label">LastName</label>  
+                <input name="LastName" class="form-control" type="form-control" />  
+                <span validation-for="LastName" class="text-danger"></span>  
+            </div>  
+            <div class="form-group">  
+                <label for="City" class="control-label">City</label>  
+                <input name="City" class="form-control" type="form-control" />  
+                <span validation-for="City" class="text-danger"></span>  
+            </div>  
+            <div class="form-group">  
+                <label for="State" class="control-label">State</label>  
+                <input name="State" class="form-control" />  
+                <span validation-for="State" class="text-danger"></span>  
+            </div>  
+            <div class="form-group">  
+                <label for="Gender" class="control-label">Gender</label>  
+                @*<input asp-for="Gender" class="form-control" />*@  
+  
+                <input type="radio" name="Gender" value="M" />Male  
+                <input type="radio" name="Gender" value="F" />Female  
+  
+                <span validation-for="Gender" class="text-danger"></span>  
+            </div>
+                      
+            <div class="form-group">  
+                         <input type="submit" value="Save" class="btn btn-primary"  />
+                        
+                        <input type="reset" value="Clear Details" class="btn btn-primary" />  
+            </div>  
+            <b>@ViewBag.message</b>  
+                </form>  
+            </div>  
+        </div>  
+  
+        @section Scripts {  
+            @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}  
+        }  
+
+       
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Persons List</h2>
+		</div>
+     
+	</div>
+    <br /><br />
+
+<table class="table table-bordered table-striped" style="width:100%">
+    <thead>
+        <tr>
+            <th>
+               First Name
+			</th>
+            <th>
+               Last Name
+			</th>
+            <th>
+              Gender
+			</th>
+            <th>
+               City
+			</th>
+            <th>
+               State
+			</th>
+          
+		</tr>
+	</thead>
+
+    <tbody>
+        @foreach(var obj in Model)
+        {
+            <tr>
+                <td width="50%">
+                    @obj.FirstName
+				</td>
+                <td width="50%">
+                    @obj.LastName
+				</td>
+                  <td width="50%">
+                    @obj.Gender
+				</td>
+                  <td width="50%">
+                    @obj.City
+				</td>
+                  <td width="50%">
+                    @obj.State
+				</td>
+                        <td>
+                            @Html.ActionLink("Delete", "Delete", new {i = @obj.FirstName})</td>
+			</tr>
+        }
+    </tbody>
+ 
+    
+
+</table>
+</div>
+
